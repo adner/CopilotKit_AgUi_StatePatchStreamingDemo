@@ -3,7 +3,7 @@
 
 This is a demo of an agent UI that gets updated dynamically, as the ToolCallArgs AG-UI events gets streamed by the LLM. Basically I did my own implementation of what I have suggested [here](https://github.com/CopilotKit/CopilotKit/issues/2993).
 
-Ask the AI to draw something, usually it works. :-) State is not cleared on refresh, so you might need to open up an incognito window to start from scratch.
+Ask the AI to draw something, usually it works. 🙂
 
 ### Setup
 `bun install`
