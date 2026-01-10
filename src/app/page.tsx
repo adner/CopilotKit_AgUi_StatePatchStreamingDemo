@@ -593,6 +593,16 @@ function PixelCanvas({ onDebugUpdate }: { onDebugUpdate: (toolCallId: string, bu
 function SidebarChat() {
   const { agent } = useAgent({ agentId: "stateAgent" });
 
+  // Generate unique thread ID per session (persisted in sessionStorage)
+  const [threadId] = useState(() => {
+    if (typeof window === "undefined") return `thread-${crypto.randomUUID()}`;
+    const stored = sessionStorage.getItem("copilot-thread-id");
+    if (stored) return stored;
+    const newId = `thread-${crypto.randomUUID()}`;
+    sessionStorage.setItem("copilot-thread-id", newId);
+    return newId;
+  });
+
   // Use ref to always get latest agent state in handler
   const agentRef = useRef(agent);
   agentRef.current = agent;
@@ -611,7 +621,7 @@ function SidebarChat() {
       defaultOpen={true}
       width="40%"
       agentId="stateAgent"
-      threadId="thread1"
+      threadId={threadId}
       input={{
         toolsMenu: [
           {
